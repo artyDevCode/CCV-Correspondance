@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CCVCorrespondance.Models.Access>
+
+@{
+    ViewBag.Title = "Access Control";
+}
+
+<h1></h1>
+@*//Arty*@
+    <p>
+        @Html.ActionLink("Add", "Create", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, new { @class = "btn btn-primary" })
+    </p>
+<table class="table">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessGroup)
+        </th>
+
+        <th></th>
+    </tr>*@
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessGroup)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }*@
+
+    @*@if ((ViewData["InAssociatesRole"] == "true") || ViewData["InTipstaffRole"] == "true" || ViewData["InOwnerRole"] == "true")
+    {*@
+
+        <div id="demo">
+            <table id="accessgroups" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.AccessGroup)</th>
+                        <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                        <td id="tab2">&nbsp</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.AccessGroup)</td>
+            <td id="tab1"> @Html.DisplayFor(modelItem => item.UserName)</td>
+            @*<td>@Html.ActionLink(item.UserName, "Edit", "Access", new { id = item.Id }, null)</td>*@
+            <td>@Html.ActionLink("Delete", "Delete", "Access", new { id = item.Id, SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</td>
+
+        </tr>
+    }
+}
+                </tbody>
+            </table>
+        </div>
+    @*  }*@
+
+
+</table>

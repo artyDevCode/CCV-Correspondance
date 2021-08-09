@@ -1,0 +1,4 @@
+C:\C#Development\TFS SharePointApps\CCV Correspondance\CCVCorrespondance\CCVCorrespondance.SharePoint\bin\Debug\CCVCorrespondance.SharePoint.dll.config
+C:\C#Development\TFS SharePointApps\CCV Correspondance\CCVCorrespondance\CCVCorrespondance.SharePoint\bin\Debug\CCVCorrespondance.SharePoint.pdb
+C:\C#Development\TFS SharePointApps\CCV Correspondance\CCVCorrespondance\CCVCorrespondance.SharePoint\obj\Debug\CCVCorrespondance.SharePoint.dll
+C:\C#Development\TFS SharePointApps\CCV Correspondance\CCVCorrespondance\CCVCorrespondance.SharePoint\obj\Debug\CCVCorrespondance.SharePoint.pdb

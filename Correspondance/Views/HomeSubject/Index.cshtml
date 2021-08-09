@@ -1,0 +1,180 @@
+﻿@model IEnumerable<CCVCorrespondance.Models.Correspondance>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="container">
+
+    @*<h2>Correspondances</h2>*@
+
+    @*<select style="border:none;" name='PreviousReceiver' onchange='if (this.value == "Received") { window.location.href = "../Correspondance/Create?ctype=" + this.value + "&cyear=" + Date.now() } else { window.location.href = "../Correspondance/Create?ctype=" + this.value + "&cyear=" + new Date.getFullYear() }'>
+            <option value="">New Correspondance</option>
+            <option value='Received'>Received</option>
+            <option value='Sent'>Sent</option>
+        </select>*@
+
+
+    <p>
+        <input type="image" class="NewDoclogo" />
+        @Html.ActionLink("New - Correspondance Received", "Create", "Correspondance", new { ctype = "Received", cyear = DateTime.Now.Year, SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null) <a id="tab4"></a>
+        <input type="image" class="NewDoclogo" />
+        @Html.ActionLink("New - Correspondance Sent", "Create", "Correspondance", new { ctype = "Sent", cyear = DateTime.Now.Year, SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null) <a id="tab4"></a>
+    </p>
+
+    <table border="0">
+        <tr>
+            <td class="auto-style20">
+                <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color: whitesmoke; width: 100%; height: 100%;">
+                    <tr style="background-color: darkblue; color: white"><th align="center" class="auto-style19"><b>Correspondance</b></th></tr>
+                    <tr>
+                        <td class="auto-style2">
+                            <table border="0" style="font-family: Arial; font-size: 12pt; width: 100%; background-color: white;" cellspacing="0" cellpadding="0">
+                                <tr style="">
+                                    <td align="left" valign="top">
+                                        <p>
+                                            @if ((ViewData["InUsersRole"] == "true") || ViewData["InOwnerRole"] == "true")
+                                            {
+                                                <img src="~/Content/icons/menuitem.jpg" style="float:left;">
+                                                @Html.ActionLink("All", "Index", "Home", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)}
+                                        </p>
+                                        <p></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <p>
+                                            @if ((ViewData["InUsersRole"] == "true") || ViewData["InOwnerRole"] == "true")
+                                            {
+                                                <img src="~/content/icons/menuitem.jpg" style="float:left;">
+                                                @Html.ActionLink("Date", "Index", "HomeDate", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)}
+                                        </p>
+                                        <p></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <p>
+                                            @if ((ViewData["InUsersRole"] == "true") || ViewData["InOwnerRole"] == "true")
+                                            {
+                                                <img src="~/content/icons/menuitem.jpg" style="float:left;">
+                                                @Html.ActionLink("Department", "Index", "HomeDepartment", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)}
+                                        </p>
+                                        <p></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <p>
+                                            @if ((ViewData["InUsersRole"] == "true") || ViewData["InOwnerRole"] == "true")
+                                            {
+                                                <img src="~/content/icons/menuitem.jpg" style="float:left;">
+                                                @Html.ActionLink("From", "Index", "HomeFrom", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)}
+                                        </p>
+                                        <p></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <p>
+                                            @if ((ViewData["InUsersRole"] == "true") || ViewData["InOwnerRole"] == "true")
+                                            {
+                                                <img src="~/content/icons/menuitem.jpg" style="float:left;">
+                                                @Html.ActionLink("Subject", "Index", "HomeSubject", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)}
+                                        </p>
+                                        <p></p>
+                                    </td>
+                                </tr>
+
+                                @*@Html.DropDownList("ALRSRequestorPosition", ViewData["HRPNames"] as SelectList, new { onchange = "document.location.href = '/Home/Index?rp=' + this.options[this.selectedIndex].value;" })*@
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    @*</td>*@
+
+    @*Server side datatables*@
+    <td class="auto-style1">
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color: whitesmoke; width: 100%; ">
+            <tr style="background-color: darkblue; color: white"><th align="center" class="auto-style19"><b></b>View</th></tr>
+        </table>
+
+        <table id="examplesubject" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Type</th>
+                    <th>From/To</th>
+                    <th>Department</th>
+                    <th>Subject</th>
+                    <th>Date on Letter</th>
+                    <th>Date Received/Sent</th>
+                    @*<th>Id</th>*@
+                </tr>
+            </thead>
+        </table>
+    </td>
+
+    @*<td class="auto-style1">
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color: whitesmoke; width: 100%; ">
+            <tr style="background-color: darkblue; color: white"><th align="center" class="auto-style19"><b>View All</b></th></tr>
+
+        </table>
+
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%; ">
+
+            <tr style="background-color: lightgoldenrodyellow; color: black">
+            </tr>
+
+            <tr>
+                <div id="demo">
+                    <table id="example" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.CorrespondanceType)</th>
+                                <th>@Html.DisplayNameFor(model => model.CorrespondanceYear)</th>
+                                <th id="tab2">@Html.DisplayNameFor(model => model.CorrespondanceFromTo)</th>
+                                <th id="tab3">@Html.DisplayNameFor(model => model.CorrespondanceDepartment)</th>
+                                <th id="tab4">@Html.DisplayNameFor(model => model.CorrespondanceSubject)</th>
+                                <th id="tab5">@Html.DisplayNameFor(model => model.CorrespondanceDateOnLetter)</th>
+                                <th id="tab6">@Html.DisplayNameFor(model => model.CorrespondanceDateReceivedOrSent)</th>
+                            </tr>
+                        </thead>
+
+                        <tfoot>
+                            <tr>
+                            </tr>
+                        </tfoot>
+
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class=@Html.Raw('"')@item.CorrespondanceType@Html.Raw('"') id=@Html.Raw('"')@item.CorrespondanceYear@Html.Raw('"')>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceType)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceYear)</td>
+                                    <td id="tab2">@Html.ActionLink(item.CorrespondanceFromTo, "Details", "Correspondance", new { id = item.ID, ctype = item.CorrespondanceType }, new { ctype = item.CorrespondanceType })</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceDepartment)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceSubject)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceDateOnLetter)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CorrespondanceDateReceivedOrSent)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </tr>
+        </table>*@
+
+    <table border="0" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>

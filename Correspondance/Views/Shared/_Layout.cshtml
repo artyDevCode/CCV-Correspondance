@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" charset="utf-8">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CCV Correspondance</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/custom")
+    <link href='@ViewBag.SPHostUrl/_layouts/15/defaultcss.ashx' type='text/css' rel='stylesheet' />
+    <script src='@ViewBag.SPHostUrl/_layouts/15/SP.UI.Controls.js'></script>
+</head>
+
+<body style="overflow: auto;">
+    <div id="chrome_ctrl_container"></div>
+    <div class="navbar">
+        <div class="container">
+            @*<h2>Welcome @ViewBag.UserName!</h2>*@
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</li>
+                @if (ViewData["InOwnerRole"] == "true")
+                {
+                    <li>@Html.ActionLink("Access Control", "Index", "Access", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</li>
+                    <li>@Html.ActionLink("Report", "Index", "CorrespondanceReport", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</li>
+                }
+                <li>@Html.ActionLink("About", "About", "Home", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, null)</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-text">Hello, @User.Identity.Name!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @RenderSection("DocumentLog", required: false) <br /> <br />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - CCV Correspondance<span style="float:right;"><input type="image" class="HomeFooterlogo" style="height:50px;" /></span> </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+@*<!DOCTYPE html>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" charset="utf-8">
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - CCV Correspondance</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/custom")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <input type="image" class="Homelogo" style="width:130px;" />
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink(" Home", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (ViewData["InOwnerRole"] == "true" || ViewData["InUsersRole"] == "true")
+                        {
+                            <li>@Html.ActionLink("Access Control", "Index", "Access")</li>
+                            <li>@Html.ActionLink("Report", "Index", "CorrespondanceReport")</li>
+                        }
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="navbar-text">Hello, @User.Identity.Name!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            @RenderSection("DocumentLog", required: false) <br /> <br />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - CCV Correspondance <span style="float:right;"><input type="image" class="HomeFooterlogo" style="height:50px;" /></span> </p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@

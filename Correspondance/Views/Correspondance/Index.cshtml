@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CCVCorrespondance.Models.Correspondance>
+
+@*@model IList<CCVCorrespondance.Models.Correspondance>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceFromTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceDepartment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceSubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceDateOnLetter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceDateReceivedOrSent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceBody)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondanceAdditionalComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentDateModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentDateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentCreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceFromTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceDepartment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceSubject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceDateOnLetter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceDateReceivedOrSent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceBody)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrespondanceAdditionalComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentDateModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentDateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentCreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

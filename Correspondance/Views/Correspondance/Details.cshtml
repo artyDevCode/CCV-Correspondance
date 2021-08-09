@@ -1,0 +1,253 @@
+﻿@model CCVCorrespondance.Models.Correspondance
+
+@*<h2></h2>*@
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+</p>*@
+
+<head>
+    <style type="text/css">
+        .auto-style3 {
+            height: 66px;
+        }
+
+
+        .auto-style5 {
+            width: 150px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            color: blue;
+
+            /*text-align: left;
+            width: 332px;*/
+        }
+
+        .auto-style7 {
+            text-align: left;
+            width: 332px;
+        }
+
+        .auto-style8 {
+            width: 331px;
+        }
+
+        .auto-style9 {
+            width: 331px;
+        }
+
+        .auto-style10 {
+            width: 332px;
+        }
+
+        .auto-style11 {
+            width: 332px;
+        }
+
+        .auto-style15 {
+            width: 1277px;
+        }
+
+        .auto-style16 {
+            height: 108px;
+        }
+
+        .auto-style17 {
+            width: 291px;
+        }
+
+        .auto-style18 {
+            width: 1277px;
+            height: 29px;
+        }
+
+        .auto-style19 {
+            width: 290px;
+        }
+    </style>
+</head>
+
+
+@Html.HiddenFor(model => model.ID)
+
+<table border="0">
+    <tr>
+        <td class="auto-style16">
+
+            <input type="image" class="EditDoclogo" />
+            @*<input type="submit" value="" class="btn btn-linkme" />*@
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID, SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri })
+
+            <input type="image" class="DelDoclogo" />
+            @*<input type="button" value="" class="btn btn-linkme" />*@
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID, SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri })
+
+            <input type="image" class="BackDoclogo" />
+            @*<input type="button" value="" class="btn btn-linkme" />*@
+            @Html.ActionLink("Back", "Index", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri })
+
+        </td>
+    </tr>
+</table>
+
+    @{
+        @Html.DisplayCorrespondanceImage(@Model.CorrespondanceType)
+    }
+
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color:darkblue;color:white"><th align="center"><b>Correspondance Details:</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @if (Model.CorrespondanceType == "Received")
+                                    {
+                                        @:From:
+                                    }
+                                    else
+                                    {
+                                        @:To:
+                                    }
+                                </td>
+
+                                <td align="left">
+                                    @Html.DisplayFor(model => model.CorrespondanceFromTo)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDepartment):
+                                </td>
+
+                                <td align="left" class="auto-style21">
+                                    @Html.DisplayFor(model => model.CorrespondanceDepartment)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDateOnLetter):
+                                </td>
+
+                                <td align="left">
+                                    @Html.DisplayFor(model => model.CorrespondanceDateOnLetter, "{0:dd/mm/yyyy}")
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    Date @Model.CorrespondanceType:
+                                </td>
+
+                                <td align="left">
+                                    @Html.DisplayFor(model => model.CorrespondanceDateReceivedOrSent, "{0:dd/mm/yyyy}")
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceSubject):
+                                </td>
+
+                                <td align="left">
+                                    @Html.DisplayFor(model => model.CorrespondanceSubject)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDescription):
+                                </td>
+
+                                <td align="left">
+                                    @Html.DisplayFor(model => model.CorrespondanceDescription)
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color:darkblue;color:white"><th align="center"><b>Document and or Attachment(s)</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left">
+                                    @Html.DisplayFor(m => m.CorrespondanceBody)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color:darkblue;color:white"><th align="center"><b>Additional Comments / Information</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left">
+                                    @Html.DisplayFor(m => m.CorrespondanceAdditionalComments)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div>
+    @section DocumentLog
+{
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;">
+            <tr>
+                <td align="left" nowrap class="auto-style14">
+                    Record modified by @Model.DocumentModifiedBy on @Model.DocumentDateModified
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;">
+            <tr>
+                <td align="left" nowrap class="auto-style14">
+                    Record created by @Model.DocumentCreatedBy on @Model.DocumentDateCreated
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>

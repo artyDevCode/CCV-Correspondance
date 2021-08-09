@@ -1,0 +1,232 @@
+﻿@model CCVCorrespondance.Models.Correspondance
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h3></h3>
+@using (Html.BeginForm())
+{
+
+<script type ="text/javascript">
+function sendTo(url)
+{
+  document.myForm.action = url;
+  document.myForm.submit();
+}
+</script>
+
+        
+@Html.AntiForgeryToken()
+    
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.ID)
+@Html.HiddenFor(model => model.CorrespondanceType)
+@Html.HiddenFor(model => model.CorrespondanceYear)
+@Html.HiddenFor(model => model.DocumentDateCreated)
+@Html.HiddenFor(model => model.DocumentDateModified)
+@Html.HiddenFor(model => model.DocumentModifiedBy)
+@Html.HiddenFor(model => model.DocumentCreatedBy)
+@Html.HiddenFor(model => model.DocumentDeleted)
+
+<table border="0">
+    <tr>
+        <td class="auto-style16">
+            <input type="submit" value="Save and Close" class="btn btn-primary" name="action:Save" />
+            @Html.ActionLink("Back", "Index", new { SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, new { @class = "btn btn-primary" })
+            <h3></h3>
+        </td>
+    </tr>
+</table>
+
+
+@Html.DisplayCorrespondanceImage(Model.CorrespondanceType)
+
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color:darkblue;color:white"><th align="center"><b>Correspondance Details:</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @if (Model.CorrespondanceType == "Received")
+                                    {
+                                        @:From: 
+                                    }
+                                    else
+                                    {
+                                        @:To: 
+                                    }
+                                </td>
+                                    
+                                <td align="left" >
+
+                                    <input id="CorrespondanceFromDataList" type="text" name="CorrespondanceFromTo" list="CorrespondanceFromTo" value=@Html.Raw('"')@Model.CorrespondanceFromTo@Html.Raw('"') style="width:100%" />
+                                    <datalist data-autocompleteme='@Url.Action("getCorrespondanceName")' data-val="true" data-val-length="Please enter the correspondance name." data-val-length-max="500" id="CorrespondanceFromTo"></datalist>
+                                    @*<input type="text" name="CorrespondanceFromTo" list="CorrespondanceFromTo" value=@Html.Raw('"')@Model.CorrespondanceFromTo@Html.Raw('"') />
+                                    <datalist id="CorrespondanceFromTo">
+                                        @foreach (var a in ViewData["CFTNames"] as SelectList)
+                                        {
+                                            <option value=@Html.Raw('"')@a.Text@Html.Raw('"')>@a.Text</option>
+                                        }
+                                    </datalist>*@
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceFromTo)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDepartment):
+                                </td>
+
+                                <td align="left" >
+                                    <input id="CorrespondanceDepartmentDataList" type="text" name="CorrespondanceDepartment" list="CorrespondanceDepartment" value=@Html.Raw('"')@Model.CorrespondanceDepartment@Html.Raw('"') style="width:100%" />
+                                    <datalist data-autocompleteme='@Url.Action("getCorrespondanceDepartment")' id="CorrespondanceDepartment"></datalist>
+                                    @*<input type="text" name="CorrespondanceDepartment" list="CorrespondanceDepartment" value=@Html.Raw('"')@Model.CorrespondanceDepartment@Html.Raw('"') />
+                                    <datalist id="CorrespondanceDepartment">
+                                        @foreach (var a in ViewData["CDNames"] as SelectList)
+                                        {
+                                            <option value=@Html.Raw('"')@a.Text@Html.Raw('"')>@a.Text</option>
+                                        }
+                                    </datalist>*@
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDateOnLetter):
+                                </td>
+
+                                <td align="left">
+                                    <input type="datetime" id="CorrespondanceDateOnLetter" value="@string.Format("{0:dd/MM/yyyy}", @Model.CorrespondanceDateOnLetter)" name="CorrespondanceDateOnLetter" style="width: 75px;" />
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceDateOnLetter)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    Date @Model.CorrespondanceType:
+                                </td>
+
+                                <td align="left">
+                                    <input type="datetime" id="CorrespondanceDateReceivedOrSent" value="@string.Format("{0:dd/MM/yyyy}", @Model.CorrespondanceDateReceivedOrSent)" name="CorrespondanceDateReceivedOrSent" style="width: 75px;" />
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceDateReceivedOrSent)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceSubject):
+                                </td>
+
+                                <td align="left">
+                                    @Html.EditorFor(model => model.CorrespondanceSubject)
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceSubject)
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" nowrap class="auto-style5">
+                                    @Html.DisplayNameFor(model => model.CorrespondanceDescription):
+                                </td>
+
+                                <td align="left">
+                                    @Html.EditorFor(model => model.CorrespondanceDescription)
+                                    @*@Html.ValidationMessageFor(model => model.CorrespondanceDescription)*@
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color: darkblue; color: white"><th align="center" ><b>Document and or Attachment(s)</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left">
+                                    @Html.RichTextAreaFor("CorrespondanceBody", Model.CorrespondanceBody)
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceBody)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table> 
+   
+<table border="0">
+    <tr>
+        <td class="auto-style15">
+            <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; background-color:whitesmoke; width:100%;">
+                <tr style="background-color: darkblue; color: white"><th align="center" ><b>Additional Comments / Information</b></th></tr>
+                <tr>
+                    <td class="auto-style14">
+                        <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left">
+                                    @Html.RichTextAreaFor("CorrespondanceAdditionalComments", Model.CorrespondanceAdditionalComments)
+                                    @Html.ValidationMessageFor(model => model.CorrespondanceAdditionalComments)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table> 
+
+    
+
+<div>
+@section DocumentLog
+{
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;">
+            <tr>
+                <td align="left" nowrap class="auto-style14">
+                    Record modified by @Model.DocumentModifiedBy on @Model.DocumentDateModified
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;">
+            <tr>
+                <td align="left" nowrap class="auto-style14">
+                    Record created by @Model.DocumentCreatedBy on @Model.DocumentDateCreated
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+
+
+
+}

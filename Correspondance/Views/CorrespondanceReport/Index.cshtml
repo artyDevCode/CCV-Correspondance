@@ -1,0 +1,209 @@
+﻿@model IEnumerable<CCVCorrespondance.Models.CorrespondanceReport>
+
+
+@{
+    ViewBag.Title = "Report";
+}
+@*<h2>@ViewBag.Title</h2>*@
+
+@using (Html.BeginForm())
+{
+
+    <head>
+        <style type="text/css">
+            .auto-style3 {
+                height: 66px;width :100%
+            }
+
+            .auto-style5 {
+                width: 150px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                color: blue;
+            }
+
+            .auto-style7 {
+                width: 342px;
+            }
+                
+            .auto-style8 {
+                width: 200px;
+            }
+
+            .auto-style9 {
+                width: 210px;
+            }
+
+            .auto-style10 {
+                width: 315px;
+            }
+
+            .auto-style11 {
+                width: 340px;
+            }
+
+            .auto-style15 {
+                width: 1277px;
+            }
+
+            .auto-style16 {
+                height: 108px;
+            }
+
+            .auto-style17 {
+                width: 291px;
+            }
+
+            .auto-style18 {
+                width: 1277px;
+                height: 29px;
+            }
+
+            .auto-style19 {
+                width: 290px;
+            }
+        </style>
+    </head>
+
+    <table border="0">
+        <tr>
+            <td class="auto-style16">
+
+                @*<input type="image" class="SaveDoclogo" />
+                <input type="submit" value="Generate Report" class="btn btn-linkme" />*@
+                @*@Html.ActionLink("Generate Report", "Report", "Report")*@
+
+                @using (Html.BeginForm())
+{
+                    
+                    
+        @*<div class="form-control"  >
+            <span style="float:left">
+                <input type="submit" value="Generate Report" class="btn btn-primary" />
+                    @Html.ActionLink("Sortable (All)", "Report", "Report", new { SSDate = Convert.ToDateTime(DateTime.Now), SEDate = Convert.ToDateTime(DateTime.Now), SType = "Sortable", SFlag = "All" }, new { @class = "btn btn-primary" }) 
+            </span>
+        </div>*@
+
+        @*<div class="control">
+            <span style="float:right">
+                <input type="datetime" id="SSDate1" value="@string.Format("{0:dd/MM/yyyy}",DateTime.Now.ToShortDateString())" name="SSDate1" style="width: 75px;">
+                <input type="datetime" id="SEDate1" value="@string.Format("{0:dd/MM/yyyy}",DateTime.Now.ToShortDateString())" name="SEDate1" style="width: 75px;">
+                @Html.DropDownList("CorrespondanceReportTypeName", ViewData["CTNames"] as SelectList)
+                <input type="submit" value="Generate Report" />
+            </span>
+        </div>*@
+
+        <table border="0">
+            <tr>
+                <td class="auto-style15">
+                    <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 12pt; background-color: gainsboro; width: 100%;">
+                        <tr style="background-color: navy; color: white">
+                            <th align="left" class="auto-style15"><b>Report Details:</b></th>
+                        </tr>
+
+                        <tr>
+                            <td class="auto-style15">
+                                <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td id="tab1" valign="middle" nowrap class="auto-style5">
+                                            <b>Start Date:</b>
+                                        </td>
+                                        @*<td valign="middle" nowrap rowspan="2">&nbsp;</td>*@
+                                        <td valign="middle">
+                                            <input type="datetime" id="SSDate1" value="@string.Format("{0:dd/MM/yyyy}",DateTime.Now.ToShortDateString())" name="SSDate1" style="width: 75px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="auto-style15">
+                                <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: threedlightshadow;" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td id="tab1" valign="middle" nowrap class="auto-style5">
+                                            <b>End Date:</b>
+                                        </td>
+                                        @*<td valign="middle" nowrap rowspan="2">&nbsp;</td>*@
+                                        <td valign="middle">
+                                            <input type="datetime" id="SEDate1" value="@string.Format("{0:dd/MM/yyyy}",DateTime.Now.ToShortDateString())" name="SEDate1" style="width: 75px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style15">
+                                <table border="0" style="font-family: Arial; font-size: 10pt; width: 100%; background-color: whitesmoke;" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td id="tab1" valign="middle" nowrap class="auto-style5">
+                                            <b>Type:</b>
+                                        </td>
+                                        @*<td valign="middle" nowrap rowspan="2">&nbsp;</td>*@
+                                        <td valign="middle">
+                                            @Html.DropDownList("CorrespondanceReportTypeName", ViewData["CTRNames"] as SelectList)
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-control"  style="height:50px">
+            <span style="float:left">
+                    <input type="submit" value="Generate Report" class="btn btn-primary" />
+                    @Html.ActionLink("Sortable (All)", "Report", "Report", new { SSDate = Convert.ToDateTime(DateTime.Now), SEDate = Convert.ToDateTime(DateTime.Now), SType = "Sortable", SFlag = "All" , SPHostUrl = SharePointContext.GetSPHostUrl(HttpContext.Current.Request).AbsoluteUri }, new { @class = "btn btn-primary" }) 
+            </span>
+        </div>
+
+        @*<table border="0">
+            <tr>
+                <td class="auto-style5">
+                    <table border="1" cellspacing="0" cellpadding="4" style="font-family: Arial; font-size: 12pt; background-color: gainsboro; width: 100%;">
+                        <tr style="background-color: navy; color: white">
+                            <th align="left" class="auto-style15"><b>Reports:</b></th>
+                        </tr>
+
+                        <div id="demo">
+                            <table id="examplereport" border="0" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.CorrespondanceReportUser)</th>
+                                            <th id="tab2">@Html.DisplayNameFor(model => model.CorrespondanceReportStartDate)</th>
+                                            <th id="tab2">@Html.DisplayNameFor(model => model.CorrespondanceReportUser)</th>
+                                            <td id="tab2">@Html.DisplayNameFor(model => model.CorrespondanceReportStartDate)</td>
+                                            <td id="tab2">@Html.DisplayNameFor(model => model.CorrespondanceReportEndDate)</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class=@Html.Raw('"')@item.CorrespondanceReportUser@Html.Raw('"') id=@Html.Raw('"')@item.CorrespondanceReportTypeName@Html.Raw('"')>
+                                        <td>@Html.DisplayFor(modelItem => item.CorrespondanceReportUser)</td>
+                                        <td id="tab2">@Html.DisplayFor(modelItem => item.CorrespondanceReportTypeName)</td>
+                                        <td id="tab2">@Html.ActionLink("View Report", "Report", "Report", new { SSDate = Convert.ToDateTime(item.CorrespondanceReportStartDate), SEDate = Convert.ToDateTime(item.CorrespondanceReportEndDate), SType = item.CorrespondanceReportTypeName, SFlag = "View" }, null)</td>
+                                        <td id="tab2">@Html.DisplayFor(modelItem => item.CorrespondanceReportStartDate)</td>
+                                        <td id="tab2">@Html.DisplayFor(modelItem => item.CorrespondanceReportEndDate)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <tr>
+            </td>
+        </tr>
+    </table>*@
+
+} 
+
+        </td>
+     </tr>
+</table>
+
+}
